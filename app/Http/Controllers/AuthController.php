@@ -31,19 +31,9 @@ class AuthController extends Controller
     }
 
     function submitLogin(Request $request){
-        // $data = $request->only('email', 'password');
-        $data = $request->all();
+        $data = $request->only('email', 'password');
 
-        if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])) {
-            
-            if(isset($data['tetapLogin'])&&!empty($data['tetapLogin'])){
-                setcookie("email",$data['email'],time()+3600);
-                setcookie("password",$data['password'],time()+3600);
-            }else{
-                setcookie("email","");
-                setcookie("password","");
-            }
-            
+        if(Auth::attempt($data)) {            
             $request->session()->regenerate();
             return redirect()->route('dashboard.tampil');
         } else {
