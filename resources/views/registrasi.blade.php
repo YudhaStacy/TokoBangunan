@@ -12,6 +12,7 @@
 
 <body class="h-full">
     <div class="flex min-h-full flex-col justify-center px-6 py-6 lg:px-8">
+        <img class="mx-auto h-14 w-auto" src="{{ asset('icons/box.jpg') }}" alt="box">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-1 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Silahkan isi formulir
                 pendaftaran</h2>
