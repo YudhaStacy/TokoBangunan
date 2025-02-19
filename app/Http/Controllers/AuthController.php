@@ -33,7 +33,9 @@ class AuthController extends Controller
     function submitLogin(Request $request){
         $data = $request->only('email', 'password');
 
-        if(Auth::attempt($data)) {            
+        $remember = $request->has('remember');
+
+        if(Auth::attempt($data, $remember)) {            
             $request->session()->regenerate();
             return redirect()->route('dashboard.tampil');
         } else {
@@ -41,8 +43,10 @@ class AuthController extends Controller
         }
     }
 
-    function logout(){
+    function logout(Request $request){
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
 }
