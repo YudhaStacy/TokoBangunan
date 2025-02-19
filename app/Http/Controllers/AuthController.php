@@ -11,6 +11,15 @@ class AuthController extends Controller
     function tampilRegistrasi(){
         return view('registrasi');
     }
+
+    function tampilLogin(){
+        return view('login');
+    }
+
+    function tampilDashboard(){
+        return view('dashboard');
+    }
+
     function submitRegistrasi(Request $request){
         $user = new User();
         $user->name = $request->name;
@@ -18,26 +27,22 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         // dd($user);
-        return redirect()->route('login.tampil');
-    }
-
-    function tampilLogin(){
-        return view('login');
-    }
-
-    function tampilWelcome(){
-        return view('welcome');
+        return redirect()->route('login');
     }
 
     function submitLogin(Request $request){
         $data = $request->only('email', 'password');
 
-        if(Auth::attempt($data)) {
+        if(Auth::attempt($data)) {            
             $request->session()->regenerate();
-            return redirect()->route('welcome.tampil');
+            return redirect()->route('dashboard.tampil');
         } else {
             return redirect()->back()->with('gagal', 'Email atau password salah');
         }
     }
 
+    function logout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }
