@@ -17,7 +17,7 @@ Route::post('/registrasi/submit', [AuthController::class, 'submitRegistrasi'])->
 Route::get('/login', [AuthController::class, 'tampilLogin'])->name('login');
 Route::post('/login/submit', [AuthController::class, 'submitLogin'])->name('login.submit');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/signout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [AuthController::class, 'tampilDashboard'])->name('dashboard.tampil');
 
